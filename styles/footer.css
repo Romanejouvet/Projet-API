@@ -1,0 +1,17 @@
+  footer {
+    background-color: var(--noir);
+    height: 15vh;
+}  
+
+footer h2, footer p {
+    color: white;
+}
+
+#footer-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+p:nth-child(2) {
+    text-align: center;
+}
