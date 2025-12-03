@@ -6,7 +6,7 @@ header {
 
 header h1 {
   color:  var(--noir);
-  justify-self: center;
+  text-align: center;
   font-size: 1.5rem;
   padding: 7vh;
 }
