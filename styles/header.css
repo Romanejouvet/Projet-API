@@ -1,0 +1,12 @@
+header {
+  background-color: var(--gris);
+  height: 15 vh;
+  width: 100vw;
+}
+
+header h1 {
+  color:  var(--noir);
+  justify-self: center;
+  font-size: 1.5rem;
+  padding: 7vh;
+}
