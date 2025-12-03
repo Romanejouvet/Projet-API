@@ -1,6 +1,7 @@
-  footer {
+footer {
     background-color: var(--noir);
     height: 15vh;
+    padding: 3vh;
 }  
 
 footer h2, footer p {
