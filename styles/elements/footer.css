@@ -13,6 +13,6 @@ footer h2, footer p {
     justify-content: space-between;
 }
 
-p:nth-child(2) {
+#copyright {
     text-align: center;
 }

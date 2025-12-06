@@ -1,0 +1,38 @@
+@import url(../fonts.css);
+
+#search-bar{
+    width: 60%;
+    min-width: 80vw;
+    padding: 10px;
+    font-size: 16px;
+    margin-bottom : 8vh
+}
+
+#search-container{
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+.book-cover {
+    height: 25vh;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    border: solid 1px var(--gris);
+}
+
+@media screen and (min-width: 800px) {
+    .book-item {
+        width: 12vw;
+    }
+}
+
+#book-list{
+    width: 60%;
+    min-width: 80vw;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+}

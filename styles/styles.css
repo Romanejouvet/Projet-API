@@ -23,3 +23,7 @@ body {
     --blanc: #F9F8F6;
 }
 
+main{
+    background-color: var(--gris);
+    margin: 0;
+}
