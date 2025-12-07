@@ -10,3 +10,11 @@ header h1 {
   font-size: 1.5rem;
   padding: 7vh;
 }
+
+@media (max-width: 600px) {
+  header h1 {
+    font-size: 1.2rem;
+    padding: 3vh;
+    padding-top : 5vh;
+  }
+}
