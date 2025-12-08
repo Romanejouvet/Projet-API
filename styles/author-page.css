@@ -1,0 +1,35 @@
+section {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--gris);
+  gap: 1rem;
+  padding: 5rem;
+}
+
+#author-name {
+  font-size: xx-large;
+  font-weight: 400;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#biography-text {
+  font-size: xx-large;
+  font-weight: 100;
+  font-family: HankenGrotesk, "Courier New", Courier, monospace;
+}
+
+#ouvrages {
+  display: grid;
+  height: 100%;
+
+  width: 100%;
+  max-width: 10rem;
+  padding: 1vh;
+}
+
+#author-cover {
+  margin: auto;
+  width: 100%;
+}
+
+
