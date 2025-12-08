@@ -1,27 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../styles/styles.css" />
-    <title>IMAC BOOK | Livre</title>
-  </head>
 
-  <body>
-    <header>
-      <h1>IMAC BOOK</h1>
-    </header>
-    <main>
-      <div id="book-detail"></div>
-    </main>
-    <footer>
-      <div id="footer-container">
-        <h2>IMAC BOOK</h2>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../styles/styles.css" />
+  <script src="../scripts/scripts.js" defer></script>
+  <script src="../scripts/scripts-book-page.js" defer></script>
+  <link rel="shortcut icon" href="../medias/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../styles/book-page.css">
 
-        <p>Développement web - 2025</p>
+  <title>IMAC BOOK | Livre</title>
+</head>
+
+<body>
+  <header>
+    <h1>IMAC BOOK</h1>
+  </header>
+  <main>
+    <div id="book-detail">
+
+      <div id="book-section-image">
+        <img id="book-cover-blur" src="../medias/img/aucuneImage.png" alt="">
+        <img id="book-cover" src="../medias/img/aucuneImage.png" alt="">
       </div>
 
-      <p>Fait avec ❤️️ à Champs-sur-Marne</p>
-    </footer>
-  </body>
+
+      <div id="book-section-infos">
+
+
+        <h2 id="book-title">
+          Livre
+        </h2>
+
+        <p id="author-date">
+          Auteur inconnu - date
+        </p>
+
+        <h3>Decription</h3>
+
+        <p id="book-description">
+          Aucune description
+        </p>
+
+        <h3>Avis des lecteurs</h3>
+        <p id="book-review">Aucun avis</p>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <div id="footer-container">
+      <h2>IMAC BOOK</h2>
+
+      <p>Développement web - 2025</p>
+    </div>
+
+    <p id="copyright">Fait avec ❤️️ à Champs-sur-Marne</p>
+  </footer>
+</body>
+
 </html>

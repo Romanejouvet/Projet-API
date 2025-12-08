@@ -1,6 +1,7 @@
-  footer {
+footer {
     background-color: var(--noir);
     height: 15vh;
+    padding: 3vh;
 }  
 
 footer h2, footer p {
@@ -12,6 +13,6 @@ footer h2, footer p {
     justify-content: space-between;
 }
 
-p:nth-child(2) {
+#copyright {
     text-align: center;
 }
