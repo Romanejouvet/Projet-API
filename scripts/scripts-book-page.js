@@ -8,44 +8,81 @@ async function getBook() {
   }
 
   try {
+    const template = document.getElementById("book-detail-template");
+    const cloneBookDetail = template.content.cloneNode(true);
+
     const book = await isbnApi(isbn);
     console.log("ISBN:", book);
 
-    const titleElement = document.getElementById("book-title");
-    titleElement.textContent = book.title;
+    cloneBookDetail.querySelector("#book-title").textContent =
+      book.title || "Titre inconnu";
 
     const booksResponse = await fetch(
       `https://openlibrary.org${book.key}.json`
     );
     const bookData = await booksResponse.json();
 
-    const author = book.authors[0].key;
-    const authorResponse = await fetch(`https://openlibrary.org${author}.json`);
-    const authorData = await authorResponse.json();
-    const authorName = authorData.name;
+    const authorKey = book.authors?.[0]?.key;
+    let authorName = "Auteur inconnu";
+    let authorIdParam = "";
 
-    const authorElement = document.getElementById("author-date");
-    authorElement.textContent = `${authorName} - ${bookData.publish_date}`;
+    if (authorKey) {
+      const authorResponse = await fetch(
+        `https://openlibrary.org${authorKey}.json`
+      );
+      const authorData = await authorResponse.json();
 
-    const coverUrl = `https://covers.openlibrary.org/b/id/${book.covers[0]}-L.jpg`;
-    document.getElementById("book-cover").src = coverUrl;
-    document.getElementById("book-cover-blur").src = coverUrl;
+      authorName = authorData.name || authorName;
 
-    const work = bookData.works[0].key;
+      authorIdParam = authorKey.replace("/authors/", "");
+    }
+    cloneBookDetail.querySelector("#author").textContent = `${authorName}`;
+    cloneBookDetail.querySelector(
+      "#author"
+    ).href = `author-page.html?author=${authorIdParam}`;
 
-    const workResponse = await fetch(`https://openlibrary.org${work}.json`);
-    const workData = await workResponse.json();
-    description = workData.description.value || workData.description;
-    document.getElementById("book-description").textContent = description;
+    cloneBookDetail.querySelector("#date").textContent = `${
+      bookData.publish_date || "date inconnue"
+    }`;
 
-    const ratingResponse = await fetch(
-      `https://openlibrary.org${work}/ratings.json`
-    );
-    const ratingData = await ratingResponse.json();
-    const avg = ratingData.summary.average;
-    const count = ratingData.summary.count;
-    const reviewText = `${avg.toFixed(1)} / 5 (${count} votes)`;
-    document.getElementById("book-review").textContent = reviewText;
+    if (book.covers?.length > 0) {
+      const coverUrl = `https://covers.openlibrary.org/b/id/${book.covers[0]}-L.jpg`;
+      cloneBookDetail.querySelector("#book-cover").src = coverUrl;
+      cloneBookDetail.querySelector("#book-cover-blur").src = coverUrl;
+    }
+
+    const workKey = bookData.works?.[0]?.key;
+    if (workKey) {
+      const workResponse = await fetch(
+        `https://openlibrary.org${workKey}.json`
+      );
+      const workData = await workResponse.json();
+
+      const description =
+        workData.description?.value ||
+        workData.description ||
+        "Aucune description disponible.";
+
+      cloneBookDetail.querySelector("#book-description").textContent =
+        description;
+
+      const ratingResponse = await fetch(
+        `https://openlibrary.org${workKey}/ratings.json`
+      );
+      const ratingData = await ratingResponse.json();
+
+      if (ratingData.summary?.average) {
+        const avg = ratingData.summary.average;
+        const count = ratingData.summary.count;
+        const reviewText = `${avg.toFixed(1)} / 5 (${count} votes)`;
+        cloneBookDetail.querySelector("#book-review").textContent = reviewText;
+      } else {
+        cloneBookDetail.querySelector("#book-review").textContent =
+          "Aucun avis";
+      }
+    }
+
+    document.querySelector("main").appendChild(cloneBookDetail);
   } catch (error) {
     console.error("Erreur :", error);
   }

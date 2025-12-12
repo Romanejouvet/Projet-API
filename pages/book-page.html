@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
   <meta charset="UTF-8" />
@@ -18,43 +18,43 @@
     <h1>IMAC BOOK</h1>
   </header>
   <main>
-    <div id="book-detail">
+    <template id="book-detail-template">
+      <article id="book-detail">
 
-      <div id="book-section-image">
-        <img id="book-cover-blur" src="../medias/img/aucuneImage.png" alt="">
-        <img id="book-cover" src="../medias/img/aucuneImage.png" alt="">
-      </div>
+        <figure id="book-section-image">
+          <img id="book-cover-blur" src="../medias/img/aucuneImage.png" alt="">
+          <img id="book-cover" src="../medias/img/aucuneImage.png" alt="">
+        </figure>
+
+        <section id="book-section-infos">
+
+          <h2 id="book-title">
+
+          </h2>
+
+          <section id="book-author-date">
+            <a id="author"></a>
+
+            <p> - </p>
+            <p id="date"></p>
+          </section>
 
 
-      <div id="book-section-infos">
+          <h3>Description</h3>
 
+          <p id="book-description"></p>
 
-        <h2 id="book-title">
-          Livre
-        </h2>
-
-        <p id="author-date">
-          Auteur inconnu - date
-        </p>
-
-        <h3>Decription</h3>
-
-        <p id="book-description">
-          Aucune description
-        </p>
-
-        <h3>Avis des lecteurs</h3>
-        <p id="book-review">Aucun avis</p>
-      </div>
-    </div>
+          <h3>Avis</h3>
+          <p id="book-review"></p>
+        </section>
+      </article>
+    </template>
   </main>
   <footer>
     <div id="footer-container">
       <h2>IMAC BOOK</h2>
-
       <p>Développement web - 2025</p>
     </div>
-
     <p id="copyright">Fait avec ❤️️ à Champs-sur-Marne</p>
   </footer>
 </body>
