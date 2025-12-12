@@ -24,18 +24,24 @@ async function getBook() {
 
     const authorKey = book.authors?.[0]?.key;
     let authorName = "Auteur inconnu";
+    let authorIdParam = "";
 
     if (authorKey) {
       const authorResponse = await fetch(
         `https://openlibrary.org${authorKey}.json`
       );
       const authorData = await authorResponse.json();
-      authorName = authorData.name || authorName;
-    }
 
+      authorName = authorData.name || authorName;
+
+      authorIdParam = authorKey.replace("/authors/", "");
+    }
+    cloneBookDetail.querySelector("#author").textContent = `${authorName}`;
     cloneBookDetail.querySelector(
-      "#author-date"
-    ).textContent = `${authorName} - ${
+      "#author"
+    ).href = `author-page.html?author=${authorIdParam}`;
+
+    cloneBookDetail.querySelector("#date").textContent = `${
       bookData.publish_date || "date inconnue"
     }`;
 
