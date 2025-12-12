@@ -23,3 +23,16 @@ main{
     background-color: var(--gris);
     margin: 0;
 }
+
+main a{
+    color: inherit;
+    text-decoration: none;
+}
+
+main a:hover{
+    text-decoration: underline;
+}
+
+main a:focus{
+    color: var(--noir);
+}
