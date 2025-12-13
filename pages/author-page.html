@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="../styles/styles.css" />
     <link rel="stylesheet" href="../styles/elements/book.css" />
     <link rel="stylesheet" href="../styles/author-page.css" />
+    <script src="../scripts/scripts-author-page.js" defer></script>
     <title>IMAC BOOK | Auteur</title>
   </head>
   <body>
@@ -14,7 +15,12 @@
     </header>
 
     <main>
-      <template>
+      <template id="book-author-template">
+        <section id="infos-author">
+          <img id="author-face" src="" alt="" />
+          <h2 id="author-name"></h2>
+          <p id="Biography"></p>
+        </section>
         <div id="book-list-container">
           <div id="book-list">
             <div class="book-item">
