@@ -45,7 +45,7 @@ async function getBook() {
       bookData.publish_date || "date inconnue"
     }`;
 
-    if (book.covers?.length > 0) {
+    if (book.covers) {
       const coverUrl = `https://covers.openlibrary.org/b/id/${book.covers[0]}-L.jpg`;
       cloneBookDetail.querySelector("#book-cover").src = coverUrl;
       cloneBookDetail.querySelector("#book-cover-blur").src = coverUrl;
