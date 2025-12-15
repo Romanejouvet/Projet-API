@@ -1,6 +1,5 @@
 #book-detail {
   padding: 3vh;
-
 }
 
 #book-section-infos {
@@ -17,6 +16,19 @@
 
 #book-section-image {
   margin-bottom: 3vh;
+}
+
+#book-author-date {
+  display: flex;
+  gap: 1vw;
+}
+
+#author {
+  color: var(--noir);
+}
+
+#author:focus {
+  color: var(--noir);
 }
 
 @media (max-width: 1224px) {
