@@ -11,6 +11,9 @@
   <link rel="stylesheet" href="./styles/home-page.css" />
   <link rel="stylesheet" href="./styles/elements/book.css" />
   <link rel="shortcut icon" href="./medias/favicon.ico" type="image/x-icon">
+  <script src="./scripts/scripts.js" defer></script>
+  <script src="./scripts/script-book-list.js" defer></script>
+  <script src="./scripts/script-index-page.js" defer></script>
   <title>IMAC BOOK | Home</title>
 </head>
 
@@ -24,6 +27,7 @@
       <input type="text" id="search-bar" placeholder="Rechercher un Nom / Auteur / ISBN ..." />
     </div>
 
+    <!--
     <div id="last-release-container">
       <h2> Derniere sortie </h2>
       <div id="last-release">
@@ -37,6 +41,21 @@
         </section>
       </div>
     </div>
+    -->
+
+    <template id="last-release-template">
+      <div id="last-release">
+        <img src="./medias/img/placeholder.jpeg" alt="Cover Image" />
+        <section id="book-info">
+          <h3 class="book-title">Book Title</h3>
+          <p class="book-author"><a href="#">Author Name</a></p>
+          <p class="book-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        </section>
+      </div>
+    </template>
+
 
 
     <div id="book-list-container">
@@ -47,65 +66,14 @@
 
       <div id="book-list">
 
-        <div class="book-item">
-          <img src="./medias/img/placeholder.jpeg" alt="Cover Image" class="book-cover" />
-          <h3 class="book-title">Book Title</h3>
+        <section class="book-item">
+          <a href="">
+            <img src="./medias/img/placeholder.jpeg" alt="" class="book-cover" />
+            <h3 class="book-title">Book Title</h3>
+          </a>
           <p class="book-author"><a href="#">Author Name</a></p>
-        </div>
+        </section>
 
-        <div class="book-item">
-          <img src="./medias/img/placeholder.jpeg" alt="Cover Image" class="book-cover" />
-          <h3 class="book-title">Book Title</h3>
-          <p class="book-author"><a href="#">Author Name</a></p>
-        </div>
-
-        <div class="book-item">
-          <img src="./medias/img/placeholder.jpeg" alt="Cover Image" class="book-cover" />
-          <h3 class="book-title">Book Title</h3>
-          <p class="book-author"><a href="#">Author Name</a></p>
-        </div>
-
-        <div class="book-item">
-          <img src="./medias/img/placeholder.jpeg" alt="Cover Image" class="book-cover" />
-          <h3 class="book-title">Book Title</h3>
-          <p class="book-author"><a href="#">Author Name</a></p>
-        </div>
-
-        <div class="book-item">
-          <img src="./medias/img/placeholder.jpeg" alt="Cover Image" class="book-cover" />
-          <h3 class="book-title">Book Title</h3>
-          <p class="book-author"><a href="#">Author Name</a></p>
-        </div>
-
-        <div class="book-item">
-          <img src="./medias/img/placeholder.jpeg" alt="Cover Image" class="book-cover" />
-          <h3 class="book-title">Book Title</h3>
-          <p class="book-author"><a href="#">Author Name</a></p>
-        </div>
-
-        <div class="book-item">
-          <img src="./medias/img/placeholder.jpeg" alt="Cover Image" class="book-cover" />
-          <h3 class="book-title">Book Title</h3>
-          <p class="book-author"><a href="#">Author Name</a></p>
-        </div>
-
-        <div class="book-item">
-          <img src="./medias/img/placeholder.jpeg" alt="Cover Image" class="book-cover" />
-          <h3 class="book-title">Book Title</h3>
-          <p class="book-author"><a href="#">Author Name</a></p>
-        </div>
-
-        <div class="book-item">
-          <img src="./medias/img/placeholder.jpeg" alt="Cover Image" class="book-cover" />
-          <h3 class="book-title">Book Title</h3>
-          <p class="book-author"><a href="#">Author Name</a></p>
-        </div>
-
-        <div class="book-item">
-          <img src="./medias/img/placeholder.jpeg" alt="Cover Image" class="book-cover" />
-          <h3 class="book-title">Book Title</h3>
-          <p class="book-author"><a href="#">Author Name</a></p>
-        </div>
       </div>
     </div>
 
