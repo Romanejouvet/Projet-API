@@ -10,7 +10,7 @@ async function getLastRelease() { // use code below to load the last release
     // récupérer le titre
     clone.querySelector("#book-title").textContent = recommanded_book.title || "Titre inconnu";
     // récupérer le lien vers la page du livre
-    clone.querySelector("#book-link").href = `./book-page.html?isbn=${recommanded_book.isbn_13 ? recommanded_book.isbn_13[0] : isbn}`;
+    clone.querySelector("#book-link").href = `./pages/book-page.html?isbn=${recommanded_book.isbn_13 ? recommanded_book.isbn_13[0] : isbn}`;
 
     // récupérer la cover
     if (recommanded_book.covers) {
@@ -42,7 +42,7 @@ async function getLastRelease() { // use code below to load the last release
     clone.querySelector("#book-author").textContent = `${authorName}`;
     clone.querySelector(
       "#book-author"
-    ).href = `./author-page.html?author=${authorIdParam}`;
+    ).href = `./pages/author-page.html?author=${authorIdParam}`;
 
 
     // récupérer la description
