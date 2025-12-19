@@ -1,6 +1,7 @@
 const searchParams = new URLSearchParams(window.location.search);
 const isbn = searchParams.get("isbn");
 
+
 async function getBook() {
   if (!isbn) {
     console.error("Pas d'ISBN");
