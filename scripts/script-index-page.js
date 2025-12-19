@@ -1,4 +1,4 @@
-const isbn = '9782070248100';
+const isbn = '9782738208590';  // ISBN random codé en dur (un peu ghetto mais bon)
 
 async function getLastRelease() { // use code below to load the last release
   try {
@@ -40,9 +40,7 @@ async function getLastRelease() { // use code below to load the last release
       authorIdParam = authorKey.replace("/authors/", "");
     }
     clone.querySelector("#book-author").textContent = `${authorName}`;
-    clone.querySelector(
-      "#book-author"
-    ).href = `./pages/author-page.html?author=${authorIdParam}`;
+    clone.querySelector("#book-author").href = `./pages/author-page.html?author=${authorIdParam}`;
 
 
     // récupérer la description
@@ -54,7 +52,7 @@ async function getLastRelease() { // use code below to load the last release
       const workData = await workResponse.json();
 
       const description =
-        workData.description?.value ||
+        workData.description?.value.split("-")[0] ||
         workData.description ||
         "Aucune description disponible.";
 
