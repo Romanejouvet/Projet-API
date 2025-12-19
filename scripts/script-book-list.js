@@ -1,78 +1,4 @@
-async function getIndividualBook(bookId) { // get individual book name / author / image
-
-    let bookTitle = "";
-    let bookAuthor = "";
-    let bookImage = "";
-    let bookTitleLink = "";
-    let bookAuthorLink = "";
-
-    try {
-        const individualBook = await isbnApi(bookId);
-        console.log("Individual book:", individualBook);
-
-        // récupérer le titre
-        bookTitle = individualBook.title || "Titre inconnu";
-        // récupérer le lien vers la page du livre
-        bookTitleLink = `./pages/book-page.html?isbn=${individualBook.isbn_13 ? individualBook.isbn_13[0] : bookId}`;
-
-        // récupérer la cover
-        if (individualBook.covers) {
-            const coverUrl = `https://covers.openlibrary.org/b/id/${individualBook.covers[0]}-M.jpg`;
-            bookImage = coverUrl;
-        }
-
-        // récupérer l'auteur
-        const authorKey = individualBook.authors?.[0]?.key;
-        let authorName = "Auteur inconnu";
-        let authorIdParam = "";
-
-        if (authorKey) {
-            const authorResponse = await fetch(
-                `https://openlibrary.org${authorKey}.json`
-            );
-            const authorData = await authorResponse.json();
-
-            authorName = authorData.name || authorName;
-
-            authorIdParam = authorKey.replace("/authors/", "");
-        }
-        bookAuthor = `${authorName}`;
-        bookAuthorLink = `./pages/author-page.html?author=${authorIdParam}`;
-
-        let bookInfos = [bookTitle, bookAuthor, bookImage, bookTitleLink, bookAuthorLink];
-        return bookInfos;
-
-    } catch (error) {
-        console.error("Error fetching individual book:", error);
-    }
-}
-
-async function IndividualBook(bookId) {
-
-    const bookInfos = await getIndividualBook(bookId);
-    console.log("Book Infos:", bookInfos);
-
-    const template = document.getElementById("book-item-template");
-    const clone = template.content.cloneNode(true);
-
-    // récupérer le titre
-    clone.querySelector(".book-item-title").textContent = bookInfos[0];
-    // récupérer le lien vers la page du livre
-    clone.querySelector(".book-item-link").href = bookInfos[3];
-
-    // récupérer la cover
-    if (bookInfos[2]) {
-        clone.querySelector("img").src = bookInfos[2];
-    }
-
-    // récupérer l'auteur
-    clone.querySelector(".book-item-author").textContent = bookInfos[1];
-    clone.querySelector(".book-item-author").href = bookInfos[4];
-
-    document.querySelector("#book-list").appendChild(clone);
-
-
-}
+// script-book-list.js
 
 async function displayGenreBooks(genre) {
     let bookInfos = [];
@@ -87,17 +13,12 @@ async function displayGenreBooks(genre) {
 
         for (let i = 0; i < 10; i++) {
             const work = works[i];
-            console.log("Work:", work);
+
             const bookName = work.title;
-            console.log("Book Name:", bookName);
             const authorName = work.authors?.[0]?.name || "Auteur inconnu";
-            console.log("Author Name:", authorName);
             const bookCoverId = work.cover_id ? work.cover_id : null;
-            console.log("Book Cover ID:", bookCoverId);
             const bookLink = `./pages/book-page.html?isbn=${work.cover_edition_key}`;
-            console.log("Book Link:", bookLink);
             const authorLink = `./pages/author-page.html?author=${work.authors?.[0]?.key.replace("/authors/", "")}`;
-            console.log("Author Link:", authorLink);
 
             bookInfos[i][0] = bookName;
             bookInfos[i][1] = authorName;
@@ -118,4 +39,101 @@ async function displayGenreLists() {
     console.log("Book Infos for Genre 'love':", bookInfos);
 }
 
+async function displayGenreLists() {
+    const bookInfos = await displayGenreBooks("love");
+    if (!bookInfos) return;
+
+    const template = document.getElementsByClassName("book-item-template")[0];
+    const bookList = document.getElementById("book-list");
+
+    for (let i = 0; i < bookInfos.length; i++) {
+        const book = bookInfos[i];
+        if (!book) return;
+        const clone = template.content.cloneNode(true);
+
+        clone.querySelector(".book-item-link").href = book[3];
+        clone.querySelector(".book-item-cover").src = book[2] || "./medias/img/aucuneImage.png";
+        clone.querySelector(".book-item-cover").alt = `Couverture de ${book[0]}`;
+        clone.querySelector(".book-item-title").textContent = book[0];
+        clone.querySelector(".book-item-author").textContent = book[1];
+        clone.querySelector(".book-item-author").href = book[4];
+
+        bookList.appendChild(clone);
+
+    };
+}
+
 displayGenreLists();
+
+/*
+async function getBookListAuthor() {
+  try {
+    const BookAuthorResponse = await fetch(
+      `https://openlibrary.org/authors/${authorURL}/works.json?limit=10`
+    );
+
+    const BookAuthorData = await BookAuthorResponse.json();
+    console.log(BookAuthorData);
+
+    const template = document.getElementById("book-list-template");
+
+    // On récupère le nom de l’auteur déjà affiché en haut
+    const authorName =
+      document.querySelector("#author-name")?.textContent || "Auteur";
+
+    BookAuthorData.entries.forEach((entry) => {
+      const cloneBookListAuthor = template.content.cloneNode(true);
+
+      cloneBookListAuthor.querySelector(".book-title").textContent =
+        entry.title;
+
+      cloneBookListAuthor.querySelector(".book-author").textContent =
+        authorName;
+
+      const imageElement = cloneBookListAuthor.querySelector(".book-cover");
+
+      const coverId = entry.covers?.find((id) => id > 0);
+
+      if (coverId) {
+        imageElement.src = `https://covers.openlibrary.org/b/id/${coverId}-L.jpg`;
+        imageElement.alt = `Couverture de ${entry.title}`;
+      } else {
+        imageElement.src = "/medias/img/aucuneImage.png";
+        imageElement.alt = "Pas de couverture disponible";
+      }
+
+      imageElement.addEventListener("click", async () => {
+        try {
+        
+          const editionsResponse = await fetch(
+            `https://openlibrary.org${entry.key}/editions.json`
+          );
+          const editionsData = await editionsResponse.json();
+          let isbn = null;
+
+          for (const edition of editionsData.entries) {
+            if (edition.isbn_13 && edition.isbn_13.length > 0) {
+              isbn = edition.isbn_13[0];
+              break;
+            } else if (edition.isbn_10 && edition.isbn_10.length > 0) {
+              isbn = edition.isbn_10[0];
+              break;
+            }
+          }
+
+       
+          if (isbn) {
+            window.location.href = `/pages/book-page.html?isbn=${isbn}`;
+          }
+        } catch (error) {
+          console.error("Erreur lors de la récupération de l'ISBN :", error);
+        }
+      });
+
+      document.getElementById("book-list").appendChild(cloneBookListAuthor);
+    });
+  } catch (error) {
+    console.error("Erreur :", error);
+  }
+}
+  */

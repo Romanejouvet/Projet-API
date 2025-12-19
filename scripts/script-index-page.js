@@ -1,3 +1,5 @@
+// script-index-page.js
+
 const isbn = '9782738208590';  // ISBN random codé en dur (un peu ghetto mais bon)
 
 async function getLastRelease() { // use code below to load the last release
@@ -60,7 +62,7 @@ async function getLastRelease() { // use code below to load the last release
         description;
     }
 
-    document.querySelector("main").appendChild(clone);
+    document.querySelector("#last-release-template-container").appendChild(clone);
 
   } catch (error) {
     console.error("Error fetching last release:", error);
@@ -68,24 +70,8 @@ async function getLastRelease() { // use code below to load the last release
 
 }
 
-// getLastRelease();
+getLastRelease();
 
-/*
-   template for last release
-    <template id="last-release-template">
-      <div id="last-release">
-        <img src="./medias/img/placeholder.jpeg" alt="Cover Image" />
-        <section id="book-info">
-          <a id="book-link" href="#"><h3 id="book-title">Book Title</h3></a>
-          <a id="book-author" href="#">Author Name</a>
-          <p id="book-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        </section>
-      </div>
-    </template>
-
-*/
 
 
 

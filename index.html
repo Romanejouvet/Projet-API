@@ -12,8 +12,8 @@
   <link rel="stylesheet" href="./styles/elements/book.css" />
   <link rel="shortcut icon" href="./medias/favicon.ico" type="image/x-icon">
   <script src="./scripts/scripts.js" defer></script>
-  <script src="./scripts/script-book-list.js" defer></script>
   <script src="./scripts/script-index-page.js" defer></script>
+  <script src="./scripts/script-book-list.js" defer></script>
   <title>IMAC BOOK | Home</title>
 </head>
 
@@ -23,48 +23,27 @@
   </header>
 
   <main>
-
-
+    
     <div id="search-container">
       <input type="text" id="search-bar" placeholder="Rechercher un Nom / Auteur / ISBN ..." />
     </div>
 
-    <!--
-    <div id="last-release-container">
-      <h2> Derniere sortie </h2>
-      <div id="last-release">
-        <img src="./medias/img/placeholder.jpeg" alt="Cover Image" />
-        <section id="book-info">
-          <h3 class="book-title">Book Title</h3>
-          <p class="book-author"><a href="#">Author Name</a></p>
-          <p class="book-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        </section>
-      </div>
-    </div>
-    -->
-
-    <template id="last-release-template">
-      <div id="last-release-container">
-        <div id="last-release">
-          <img src="./medias/img/placeholder.jpeg" alt="Cover Image" />
-          <section id="book-info">
-            <a id="book-link" href="#">
-              <h3 id="book-title"></h3>
-            </a>
-            <a id="book-author" href="#">Author Name</a>
-            <p id="book-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-              exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-          </section>
+    <div id="last-release-template-container">
+      <template id="last-release-template">
+        <div id="last-release-container">
+          <div id="last-release">
+            <img src="./medias/img/placeholder.jpeg" alt="Cover Image" />
+            <section id="book-info">
+              <a id="book-link" href="#">
+                <h3 id="book-title"></h3>
+              </a>
+              <a id="book-author" href="#">Author Name</a>
+              <p id="book-description">description</p>
+            </section>
+          </div>
         </div>
-      </div>
-    </template>
-
-
-
-
+      </template>
+    </div>
 
     <div id="book-list-container">
       <section id="suggestions">
@@ -73,20 +52,17 @@
       </section>
 
       <div id="book-list">
-
-        <template id="book-item-template">
+        <template class="book-item-template">
           <section class="book-item">
-            <a href="" class="book-item-link" >
+            <a href="" class="book-item-link">
               <img src="./medias/img/placeholder.jpeg" alt="" class="book-item-cover" />
               <h3 class="book-item-title">Book Title</h3>
             </a>
-            <a class="book-item-author" href="" >Author Name</a>
+            <a class="book-item-author" href="">Author Name</a>
           </section>
         </template>
-
       </div>
     </div>
-
 
   </main>
   <footer>
@@ -95,7 +71,6 @@
 
       <p>Développement web - 2025</p>
     </div>
-
 
     <p id="copyright">
       Fait avec ❤️️ à Champs-sur-Marne
