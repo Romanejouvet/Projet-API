@@ -14,6 +14,7 @@
   <script src="./scripts/scripts.js" defer></script>
   <script src="./scripts/script-book-list.js" defer></script>
   <script src="./scripts/script-index-page.js" defer></script>
+  <script src="./scripts/script-input-search-routing.js" defer></script>
   <title>IMAC BOOK | Home</title>
 </head>
 
@@ -23,9 +24,13 @@
   </header>
 
   <main>
-    <div id="search-container">
-      <input type="text" id="search-bar" placeholder="Rechercher un Nom / Auteur / ISBN ..." />
-    </div>
+    <form id="search-container">
+      <label id="search-label" for="search-bar">Chercher votre livre</label>
+      <div id="search-group">
+        <input type="search" id="search-bar" placeholder="Rechercher un auteur ou un ISBN" />
+        <button type="submit" id="search-button">Rechercher</button>
+      </div>
+    </form>
 
     <!--
     <div id="last-release-container">
