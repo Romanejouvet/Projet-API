@@ -1,34 +1,105 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Site internet ImacBook">
-  <meta name="keywords" content="ImacBook, Librairies, Livres">
- <meta name="author" content="Benoît Baraille, Alexandre Grosdidier, Romane Jouvet">
   <link rel="stylesheet" href="../styles/styles.css" />
-  <link rel="shortcut icon" href="../medias/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../styles/elements/book.css" />
+  <link rel="stylesheet" href="../styles/author-page.css" />
+  <script src="../scripts/script-return-home.js" defer></script>
+  <script src="../scripts/scripts-author-page.js" defer></script>
   <title>IMAC BOOK | Auteur</title>
 </head>
 
 <body>
   <header>
+    <button id="return-home">❮ Retour à la page d'accueil</button>
     <h1>IMAC BOOK</h1>
   </header>
 
   <main>
-    <div id="author-detail"></div>
-  </main>
-  <footer>
-    <div id="footer-container">
-      <h2>IMAC BOOK</h2>
+    <template id="book-author-template">
+      <section id="infos-author">
+        <img id="author-face" src="" alt="" />
+        <h2 id="author-name"></h2>
+        <p id="Biography"></p>
+      </section>
+    </template>
+    <div id="book-list-container">
+      <div id="book-list">
+        <template id="book-author-template">
+          <div class="book-item">
+            <img src="../medias/img/placeholder.jpeg" alt="Cover Image" class="book-cover" />
+            <h3 class="book-title">Book Title</h3>
+            <p class="book-author"><a href="#">Author Name</a></p>
+          </div>
+        </template>
+        <div class="book-item">
+          <img src="../medias/img/placeholder.jpeg" alt="Cover Image" class="book-cover" />
+          <h3 class="book-title">Book Title</h3>
+          <p class="book-author"><a href="#">Author Name</a></p>
+        </div>
 
-      <p>Développement web - 2025</p>
+        <div class="book-item">
+          <img src="../medias/img/placeholder.jpeg" alt="Cover Image" class="book-cover" />
+          <h3 class="book-title">Book Title</h3>
+          <p class="book-author"><a href="#">Author Name</a></p>
+        </div>
+
+        <div class="book-item">
+          <img src="../medias/img/placeholder.jpeg" alt="Cover Image" class="book-cover" />
+          <h3 class="book-title">Book Title</h3>
+          <p class="book-author"><a href="#">Author Name</a></p>
+        </div>
+
+        <div class="book-item">
+          <img src="../medias/img/placeholder.jpeg" alt="Cover Image" class="book-cover" />
+          <h3 class="book-title">Book Title</h3>
+          <p class="book-author"><a href="#">Author Name</a></p>
+        </div>
+
+        <div class="book-item">
+          <img src="../medias/img/placeholder.jpeg" alt="Cover Image" class="book-cover" />
+          <h3 class="book-title">Book Title</h3>
+          <p class="book-author"><a href="#">Author Name</a></p>
+        </div>
+
+        <div class="book-item">
+          <img src="../medias/img/placeholder.jpeg" alt="Cover Image" class="book-cover" />
+          <h3 class="book-title">Book Title</h3>
+          <p class="book-author"><a href="#">Author Name</a></p>
+        </div>
+
+        <div class="book-item">
+          <img src="../medias/img/placeholder.jpeg" alt="Cover Image" class="book-cover" />
+          <h3 class="book-title">Book Title</h3>
+          <p class="book-author"><a href="#">Author Name</a></p>
+        </div>
+
+        <div class="book-item">
+          <img src="../medias/img/placeholder.jpeg" alt="Cover Image" class="book-cover" />
+          <h3 class="book-title">Book Title</h3>
+          <p class="book-author"><a href="#">Author Name</a></p>
+        </div>
+
+        <div class="book-item">
+          <img src="../medias/img/placeholder.jpeg" alt="Cover Image" class="book-cover" />
+          <h3 class="book-title">Book Title</h3>
+          <p class="book-author"><a href="#">Author Name</a></p>
+        </div>
+      </div>
     </div>
-
-    <p id="copyright">Fait avec ❤️️ à Champs-sur-Marne</p>
-  </footer>
+  </main>
 </body>
+<footer>
+  <div id="footer-container">
+    <h2>IMAC BOOK</h2>
+
+    <p>Développement web - 2025</p>
+  </div>
+
+  <p id="copyright">Fait avec ❤️️ à Champs-sur-Marne</p>
+</footer>
 
 </html>
