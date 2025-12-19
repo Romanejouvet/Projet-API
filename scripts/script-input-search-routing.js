@@ -24,6 +24,6 @@ async function searchApi(value) {
 
     const authorKey = dataResponse.docs[0].key;
 
-    window.location.href = `pages/book-page.html?author=${authorKey}`;
+    window.location.href = `pages/author-page.html?author=${authorKey}`;
   }
 }
