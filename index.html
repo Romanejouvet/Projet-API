@@ -14,7 +14,7 @@
   <script src="./scripts/scripts.js" defer></script>
   <script src="./scripts/script-index-page.js" defer></script>
   <script src="./scripts/script-input-search-routing.js" defer></script>
-  <script src="./scripts/script-book-list.js" defer></script>
+  <script src="./scripts/script-book-list.js"defer ></script>
   <title>IMAC BOOK | Home</title>
 </head>
 
@@ -36,7 +36,7 @@
       <template id="last-release-template">
         <div id="last-release-container">
           <div id="last-release">
-            <img src="./medias/img/placeholder.jpeg" alt="Cover Image" />
+            <img src="./medias/img/placeholder.jpeg" alt="" class="book-cover" />
             <section id="book-info">
               <a id="book-link" href="#">
                 <h3 id="book-title"></h3>
@@ -51,12 +51,27 @@
 
     <div id="book-list-container">
       <section id="suggestions">
-        <h2>Hello 👋</h2>
-        <h3>Voici quelques suggestions pour vous :</h3>
+        <div class="suggestions-text">
+          <h2>Hello 👋</h2>
+          <h3>Voici quelques suggestions pour vous :</h3>
+        </div>
+
+        <div id="select-genre-container">
+          <label for="select-genre">Choose a subject</label>
+          <select name="genres" id="select-genre">
+            <option value="">--Please choose an option--</option>
+            <option value="love">Love</option>
+            <option value="science_fiction">Science-Fiction</option>
+            <option value="fantasy">Fantasy</option>
+            <option value="mystery">Mistery</option>
+            <option value="horror">Horror</option>
+            <option value="history">History</option>
+          </select>
+        </div>
       </section>
 
       <div id="book-list">
-        <template class="book-item-template">
+        <template id="book-item-template">
           <section class="book-item">
             <a href="" class="book-item-link">
               <img src="./medias/img/placeholder.jpeg" alt="" class="book-item-cover" />
@@ -65,6 +80,9 @@
             <a class="book-item-author" href="">Author Name</a>
           </section>
         </template>
+
+
+
       </div>
     </div>
 
