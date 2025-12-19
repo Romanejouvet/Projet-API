@@ -33,31 +33,72 @@ async function author() {
         authorData.bio.value || "Aucune biographie disponible";
     }
 
-    document.querySelector("main").appendChild(cloneauthor);
+    document.getElementById("infos-author").appendChild(cloneauthor);
   } catch (error) {
     console.error("Erreur :", error);
   }
 }
 
-
-
 async function getBookListAuthor() {
-  if (!getBookListAuthorURL) {
-    console.error("Pas d'ouvrages");
-    return;
-  }
+  try {
+    const BookAuthorResponse = await fetch(
+      `https://openlibrary.org/authors/${authorURL}/works.json?limit=10`
+    );
 
-  try { 
+    const BookAuthorData = await BookAuthorResponse.json();
+    console.log(BookAuthorData);
 
-  }
-  catch (error) {
+    const template = document.getElementById("book-list-template");
+    const authorName = document.querySelector("#author-name").textContent;
+
+    BookAuthorData.entries.forEach((info) => {
+      const cloneBookListAuthor = template.content.cloneNode(true);
+
+      cloneBookListAuthor.querySelector(".book-title").textContent = info.title;
+
+      cloneBookListAuthor.querySelector(".book-author").textContent =
+        authorName;
+
+      const imageElement = cloneBookListAuthor.querySelector(".book-cover");
+
+      if (info.covers && info.covers.length > 0) {
+        imageElement.src = `https://covers.openlibrary.org/b/id/${info.covers[0]}-L.jpg`;
+      } else {
+        imageElement.src = "/medias/img/aucuneImage.png";
+      }
+
+      imageElement.addEventListener("click", async () => {
+        try {
+          const editionsResponse = await fetch(
+            `https://openlibrary.org${info.key}.json`
+          );
+          const editionsData = await editionsResponse.json();
+          let isbn = null;
+
+          for (const edition of editionsData.entries) {
+            if (edition.isbn_13 && edition.isbn_13.length > 0) {
+              isbn = edition.isbn_13[0];
+              break;
+            } else if (edition.isbn_10 && edition.isbn_10.length > 0) {
+              isbn = edition.isbn_10[0];
+              break;
+            }
+          }
+
+          if (isbn) {
+            window.location.href = `/pages/book-page.html?isbn=${isbn}`;
+          }
+        } catch (error) {
+          console.error("Erreur lors de la récupération de l'ISBN :", error);
+        }
+      });
+
+      document.getElementById("book-list").appendChild(cloneBookListAuthor);
+    });
+  } catch (error) {
     console.error("Erreur :", error);
   }
-  
 }
 
 author();
 getBookListAuthor();
-
-
-
