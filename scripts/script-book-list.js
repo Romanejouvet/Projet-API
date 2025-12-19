@@ -5,7 +5,7 @@ async function getIndividualBook(bookId) { // get individual book name / author 
     let bookImage = "";
     let bookTitleLink = "";
     let bookAuthorLink = "";
-    
+
     try {
         const individualBook = await isbnApi(bookId);
         console.log("Individual book:", individualBook);
@@ -49,7 +49,7 @@ async function getIndividualBook(bookId) { // get individual book name / author 
 
 async function IndividualBook(bookId) {
 
-    const bookInfos =  await getIndividualBook(bookId);
+    const bookInfos = await getIndividualBook(bookId);
     console.log("Book Infos:", bookInfos);
 
     const template = document.getElementById("book-item-template");
@@ -74,3 +74,48 @@ async function IndividualBook(bookId) {
 
 }
 
+async function displayGenreBooks(genre) {
+    let bookInfos = [];
+    for (let i = 0; i < 10; i++) {
+        bookInfos[i] = [];
+    }
+
+    try {
+        const genreData = await genreAPI(genre);
+        console.log("Genre Data:", genreData);
+        const works = genreData.works || [];
+
+        for (let i = 0; i < 10; i++) {
+            const work = works[i];
+            console.log("Work:", work);
+            const bookName = work.title;
+            console.log("Book Name:", bookName);
+            const authorName = work.authors?.[0]?.name || "Auteur inconnu";
+            console.log("Author Name:", authorName);
+            const bookCoverId = work.cover_id ? work.cover_id : null;
+            console.log("Book Cover ID:", bookCoverId);
+            const bookLink = `./pages/book-page.html?isbn=${work.cover_edition_key}`;
+            console.log("Book Link:", bookLink);
+            const authorLink = `./pages/author-page.html?author=${work.authors?.[0]?.key.replace("/authors/", "")}`;
+            console.log("Author Link:", authorLink);
+
+            bookInfos[i][0] = bookName;
+            bookInfos[i][1] = authorName;
+            bookInfos[i][2] = bookCoverId ? `https://covers.openlibrary.org/b/id/${bookCoverId}-M.jpg` : "";
+            bookInfos[i][3] = bookLink;
+            bookInfos[i][4] = authorLink;
+        }
+
+        return bookInfos;
+
+    } catch (error) {
+        console.error("Error displaying genre books:", error);
+    }
+}
+
+async function displayGenreLists() {
+    const bookInfos = await displayGenreBooks("love");
+    console.log("Book Infos for Genre 'love':", bookInfos);
+}
+
+displayGenreLists();
