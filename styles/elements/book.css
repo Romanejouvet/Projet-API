@@ -1,24 +1,22 @@
-/* contient le style permettant d'afficher une liste de livres , pour la structure html, se référer a home-page.html */
-
-
-#book-list-container {
-    width: 70%;
-    margin: 0 auto 40px auto;
+#book-list-container,
+#infos-author {
+  width: 70%;
+  margin: 0 auto 40px auto;
 }
 
 #book-list {
-    margin: 0 auto;
-    padding-top: 2vh;
+  margin: 0 auto;
+  padding-top: 2vh;
 
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 30px;
-    justify-items: center;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 30px;
+  justify-items: center;
 }
 
 .book-item {
-    width: 100%;
-    max-width: 180px;
+  width: 100%;
+  max-width: 180px;
 }
 
 .book-item-cover {
@@ -26,10 +24,10 @@
     height: auto;
     object-fit: cover;
 
-    border-radius: 8px;
-    border: solid 1px var(--gris);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s;
+  border-radius: 8px;
+  border: solid 1px var(--gris);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
 }
 
 .book-item-cover:hover {
@@ -37,26 +35,26 @@
 }
 
 @media (max-width: 900px) {
-    #book-list {
-        grid-template-columns: repeat(3, 1fr);
-    }
-    #book-list-container {
-        width: 90%;
-    }
+  #book-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  #book-list-container {
+    width: 90%;
+  }
 
-    #last-release img {
-        object-fit: cover;
-    }
+  #last-release img {
+    object-fit: cover;
+  }
 }
 
 @media (max-width: 600px) {
-    #book-list {
-        grid-template-columns: repeat(2, 1fr);
-    }
+  #book-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media screen and (min-width: 600px) {
-    .book-item {
-        margin: auto;
-    }
+  .book-item {
+    margin: auto;
+  }
 }
