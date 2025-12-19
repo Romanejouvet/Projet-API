@@ -11,7 +11,6 @@ main {
   margin: 5vh auto;
 }
 
-
 #search-group {
   display: flex;
 }
@@ -39,7 +38,7 @@ main {
 #search-label {
   display: block;
   width: 100%;
-  text-align: left; 
+  text-align: left;
   margin-bottom: 1vh;
 }
 
@@ -85,6 +84,31 @@ h3 {
   #search-bar {
     width: 90%;
   }
+}
+
+#select-genre {
+  margin-left: 10px;
+  padding: 1.5vh;
+  font-size: 1rem;
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 2vh;
+  cursor: pointer;
+  font-family: "Cormorant-Garamond", "Times New Roman", serif;
+}
+
+#suggestions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom : 5vh;
+}
+
+.suggestions-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
 }
 
 @media (max-width: 600px) {

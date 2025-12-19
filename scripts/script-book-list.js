@@ -1,54 +1,50 @@
 // script-book-list.js
 
 async function displayGenreBooks(genre) {
-    let bookInfos = [];
-    for (let i = 0; i < 10; i++) {
-        bookInfos[i] = [];
-    }
+    const bookInfos = [];
 
     try {
         const genreData = await genreAPI(genre);
         console.log("Genre Data:", genreData);
+
         const works = genreData.works || [];
 
         for (let i = 0; i < 10; i++) {
             const work = works[i];
+            if (!work) continue;
 
-            const bookName = work.title;
+            const bookName = work.title || "Titre inconnu";
             const authorName = work.authors?.[0]?.name || "Auteur inconnu";
-            const bookCoverId = work.cover_id ? work.cover_id : null;
-            const bookLink = `./pages/book-page.html?isbn=${work.cover_edition_key}`;
-            const authorLink = `./pages/author-page.html?author=${work.authors?.[0]?.key.replace("/authors/", "")}`;
+            const bookCoverId = work.cover_id || null;
+            const bookLink = `./pages/book-page.html?isbn=${work.cover_edition_key || ""}`;
+            const authorLink = work.authors?.[0]?.key
+                ? `./pages/author-page.html?author=${work.authors[0].key.replace("/authors/", "")}`
+                : "#";
 
-            bookInfos[i][0] = bookName;
-            bookInfos[i][1] = authorName;
-            bookInfos[i][2] = bookCoverId ? `https://covers.openlibrary.org/b/id/${bookCoverId}-M.jpg` : "";
-            bookInfos[i][3] = bookLink;
-            bookInfos[i][4] = authorLink;
+            bookInfos.push([bookName, authorName, bookCoverId ? `https://covers.openlibrary.org/b/id/${bookCoverId}-M.jpg` : "", bookLink, authorLink]);
         }
 
         return bookInfos;
 
     } catch (error) {
         console.error("Error displaying genre books:", error);
+        return [];
     }
 }
 
-async function displayGenreLists() {
-    const bookInfos = await displayGenreBooks("love");
-    console.log("Book Infos for Genre 'love':", bookInfos);
-}
+// Affiche les livres dans le DOM
+async function displayGenreLists(genre) {
+    const bookInfos = await displayGenreBooks(genre);
+    if (!bookInfos || bookInfos.length === 0) return;
 
-async function displayGenreLists() {
-    const bookInfos = await displayGenreBooks("love");
-    if (!bookInfos) return;
-
-    const template = document.getElementsByClassName("book-item-template")[0];
+    const template = document.getElementById("book-item-template");
     const bookList = document.getElementById("book-list");
 
-    for (let i = 0; i < bookInfos.length; i++) {
-        const book = bookInfos[i];
-        if (!book) return;
+    bookList.innerHTML = "";
+
+    for (const book of bookInfos) {
+        if (!book) continue;
+
         const clone = template.content.cloneNode(true);
 
         clone.querySelector(".book-item-link").href = book[3];
@@ -59,8 +55,23 @@ async function displayGenreLists() {
         clone.querySelector(".book-item-author").href = book[4];
 
         bookList.appendChild(clone);
-
-    };
+    }
 }
 
-displayGenreLists();
+document.addEventListener("DOMContentLoaded", () => {
+    const template = document.getElementById("book-item-template");
+    if (!template) {
+        console.error("Template introuvable !");
+        return;
+    }
+
+    displayGenreLists("love");
+
+    const selectGenre = document.getElementById("select-genre");
+    selectGenre.addEventListener("change", (e) => {
+        const genre = e.target.value;
+        if (!genre) return;
+        displayGenreLists(genre);
+    });
+});
+
