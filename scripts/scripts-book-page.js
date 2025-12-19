@@ -1,6 +1,13 @@
 const searchParams = new URLSearchParams(window.location.search);
 const isbn = searchParams.get("isbn");
 
+async function testGenreAPI() {
+  const genreData = await genreAPI("love");
+  console.log("Genre Data:", genreData);
+}
+
+
+
 async function getBook() {
   if (!isbn) {
     console.error("Pas d'ISBN");
@@ -88,4 +95,4 @@ async function getBook() {
   }
 }
 
-getBook();
+testGenreAPI();

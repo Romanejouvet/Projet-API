@@ -74,4 +74,3 @@ async function IndividualBook(bookId) {
 
 }
 
-IndividualBook("9780140328721");

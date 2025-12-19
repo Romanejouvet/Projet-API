@@ -68,7 +68,7 @@ async function getLastRelease() { // use code below to load the last release
 
 }
 
-getLastRelease();
+// getLastRelease();
 
 /*
    template for last release
