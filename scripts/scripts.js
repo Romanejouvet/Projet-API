@@ -13,3 +13,10 @@ async function isbnApi(isbn) {
   // console.log(data);
   return data;
 }
+
+async function genreAPI(genre) {
+  const response = await fetch(`https://openlibrary.org/subjects/${genre}.json`);
+  const data = await response.json();
+  // console.log(data);
+  return data;
+}
