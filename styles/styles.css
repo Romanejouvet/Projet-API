@@ -3,36 +3,36 @@
 @import url(./fonts.css);
 
 body {
-    font-family: "Cormorant-Garamond", "Times New Roman", serif;
+  font-family: "Cormorant-Garamond", "Times New Roman", serif;
 }
 
-
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 :root {
-    --noir : #222222;
-    --gris : #EBEAE8;
-    --blanc: #F9F8F6;
+  --noir: #222222;
+  --gris: #ebeae8;
+  --blanc: #f9f8f6;
 }
 
-main{
-    background-color: var(--gris);
-    margin: 0;
+main {
+  background-color: var(--gris);
+  margin: 0;
 }
 
-main a{
-    color: inherit;
-    text-decoration: none;
+main a {
+  color: inherit;
+  text-decoration: none;
 }
 
-main a:hover{
-    text-decoration: underline;
+main a:hover {
+  text-decoration: underline;
 }
 
-main a:focus{
-    color: var(--noir);
+main a:focus {
+  color: var(--noir);
 }
+
