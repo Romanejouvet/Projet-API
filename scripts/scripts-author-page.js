@@ -18,23 +18,20 @@ async function author() {
     const authorData = await authorResponse.json();
     console.log(authorData);
 
-
     const nameAuthorElement = cloneauthor.querySelector("#author-name");
     const biographyElement = cloneauthor.querySelector("#Biography");
     const imageElement = cloneauthor.querySelector("#author-face");
 
-    const authorId = authorData.key.split("/").pop();
-
-    imageElement.src = `https://covers.openlibrary.org/a/olid/${authorId}-L.jpg`;
-    imageElement.alt = `Photo de ${authorData.name}`;
-
-    
+    imageElement.src = `https://covers.openlibrary.org/a/olid/${authorURL}-L.jpg`;
 
     nameAuthorElement.textContent = authorData.name ?? "Nom inconnu";
-    biographyElement.textContent =
-      typeof authorData.bio === "string"
-        ? authorData.bio
-        : authorData.bio?.value || "Aucune biographie disponible";
+
+    if (authorData.bio == undefined || authorData.bio.value == null) {
+      biographyElement.textContent = authorData.bio;
+    } else {
+      biographyElement.textContent =
+        authorData.bio.value || "Aucune biographie disponible";
+    }
 
     document.querySelector("main").appendChild(cloneauthor);
   } catch (error) {
@@ -42,4 +39,25 @@ async function author() {
   }
 }
 
+
+
+async function getBookListAuthor() {
+  if (!getBookListAuthorURL) {
+    console.error("Pas d'ouvrages");
+    return;
+  }
+
+  try { 
+
+  }
+  catch (error) {
+    console.error("Erreur :", error);
+  }
+  
+}
+
 author();
+getBookListAuthor();
+
+
+
