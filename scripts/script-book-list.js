@@ -62,8 +62,8 @@ async function displayGenreLists(genre) {
         const clone = template.content.cloneNode(true);
 
         clone.querySelector(".book-item-link").href = book[3];
-        clone.querySelector(".book-item-cover").src = book[2] || "./medias/img/aucuneImage.png";
-        clone.querySelector(".book-item-cover").alt = `Couverture de ${book[0]}`;
+        clone.querySelector(".book-cover").src = book[2] || "./medias/img/aucuneImage.png";
+        clone.querySelector(".book-cover").alt = `Couverture de ${book[0]}`;
         clone.querySelector(".book-item-title").textContent = book[0];
         clone.querySelector(".book-item-author").textContent = book[1];
         clone.querySelector(".book-item-author").href = book[4];
