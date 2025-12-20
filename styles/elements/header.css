@@ -36,5 +36,7 @@ header h1 {
   #return-home {
     padding: 0.8vh 1.5vh;
     font-size: 0.9rem;
+    position: relative;
+    top: 6vh;
   }
 }
