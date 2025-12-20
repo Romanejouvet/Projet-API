@@ -9,7 +9,7 @@ form.addEventListener("submit", (event) => {
 async function searchApi(value) {
   console.log(value);
 
-  if (!isNaN(value) && Number.isInteger(Number(value)) && value.length < 13) {
+  if (!isNaN(value) && Number.isInteger(Number(value)) && value.length <= 13) {
     console.log("ISBN");
     window.location.href = `pages/book-page.html?isbn=${value}`;
   } else {
