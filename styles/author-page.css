@@ -1,4 +1,4 @@
-section {
+#infos-author, #book-list-container {
   display: flex;
   flex-direction: column;
   background-color: var(--gris);
