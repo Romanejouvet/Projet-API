@@ -1,3 +1,3 @@
-   document.getElementById('return-home').addEventListener('click', () => {
-      window.location.href = '/index.html';
-    });
+ function goHomePage() {
+    window.location.href = '/index.html';
+  }

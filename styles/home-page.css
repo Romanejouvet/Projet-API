@@ -54,6 +54,7 @@ h3 {
   width: 70%;
   margin: 0 auto 40px auto;
 }
+
 #last-release {
   background-color: var(--blanc);
   color: var(--noir);
@@ -86,13 +87,19 @@ h3 {
   line-clamp: 5;
 }
 
-#last-release #book-author{
+#last-release #book-author {
   padding: 0 2vh;
   font-size: 1.2rem;
   font-style: italic;
 }
 
 @media (max-width: 900px) {
+  #search-button,
+  #search-bar {
+    font-size: x-small;
+  }
+
+  #search-container,
   #last-release-container {
     width: 90%;
   }
@@ -122,7 +129,7 @@ h3 {
   justify-content: space-between;
   align-items: center;
   gap: 2rem;
-  margin-bottom : 5vh;
+  margin-bottom: 5vh;
 }
 
 .suggestions-text {
@@ -150,10 +157,10 @@ h3 {
 
   #last-release #book-title {
     font-size: 1.5rem;
-    padding : 0 0 0 0;
+    padding: 0 0 0 0;
   }
-  
-  #last-release #book-author{
+
+  #last-release #book-author {
     font-size: 1rem;
   }
 
@@ -171,12 +178,11 @@ h3 {
     overflow: hidden;
   }
 
-#last-release .book-description {
-  display: -webkit-box;        
-  -webkit-box-orient: vertical;  
-  -webkit-line-clamp: 3;
-  overflow: hidden;              
-  text-overflow: ellipsis;       
-}
-
+  #last-release .book-description {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 }

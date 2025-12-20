@@ -1,4 +1,4 @@
-section {
+#infos-author, #book-list-container {
   display: flex;
   flex-direction: column;
   background-color: var(--gris);
@@ -9,13 +9,11 @@ section {
 #author-name {
   font-size: xx-large;
   font-weight: 400;
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 #biography-text {
   font-size: xx-large;
   font-weight: 100;
-  font-family: HankenGrotesk, "Courier New", Courier, monospace;
 }
 
 #ouvrages {
@@ -31,7 +29,15 @@ section {
   width: 100%;
 }
 
+#book-title {
+  font-weight: bold;
+}
 
+#book-title:hover {
+  text-decoration: line-through;
+  cursor: pointer;
+}
 
-
-
+#book-cover:hover {
+  cursor: pointer;
+}

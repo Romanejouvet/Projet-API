@@ -48,55 +48,60 @@ async function getBookListAuthor() {
     const BookAuthorData = await BookAuthorResponse.json();
     console.log(BookAuthorData);
 
+    const authorResponse = await fetch(
+      `https://openlibrary.org/authors/${authorURL}.json`
+    );
+    const authorData = await authorResponse.json();
+    const authorName = authorData.name || "Auteur inconnu";
+
     const template = document.getElementById("book-list-template");
-    const authorName = document.querySelector("#author-name").textContent;
 
-    BookAuthorData.entries.forEach((info) => {
-      const cloneBookListAuthor = template.content.cloneNode(true);
+    const entries = BookAuthorData.entries || BookAuthorData;
 
-      cloneBookListAuthor.querySelector(".book-title").textContent = info.title;
-
-      cloneBookListAuthor.querySelector(".book-author").textContent =
-        authorName;
-
-      const imageElement = cloneBookListAuthor.querySelector(".book-cover");
-
-      if (info.covers && info.covers.length > 0) {
-        imageElement.src = `https://covers.openlibrary.org/b/id/${info.covers[0]}-L.jpg`;
-      } else {
-        imageElement.src = "/medias/img/aucuneImage.png";
-      }
-
-      imageElement.addEventListener("click", async () => {
-        try {
-          const editionsResponse = await fetch(
-            `https://openlibrary.org${info.key}.json`
-          );
-          const editionsData = await editionsResponse.json();
-          let isbn = null;
-
-          for (const edition of editionsData.entries) {
-            if (edition.isbn_13 && edition.isbn_13.length > 0) {
-              isbn = edition.isbn_13[0];
-              break;
-            } else if (edition.isbn_10 && edition.isbn_10.length > 0) {
-              isbn = edition.isbn_10[0];
-              break;
-            }
-          }
-
-          if (isbn) {
-            window.location.href = `/pages/book-page.html?isbn=${isbn}`;
-          }
-        } catch (error) {
-          console.error("Erreur lors de la récupération de l'ISBN :", error);
+    for (const info of entries) {
+      try {
+        if (!info.covers || info.covers.length === 0) {
+          console.log(`${info.title} pas de couverture`);
+          continue;
         }
-      });
 
-      document.getElementById("book-list").appendChild(cloneBookListAuthor);
-    });
+        const editionsResponse = await fetch(
+          `https://openlibrary.org${info.key}/editions.json`
+        );
+        const editionsData = await editionsResponse.json();
+        const firstIsbn = editionsData.entries?.find(
+          (ed) => ed.isbn_13?.length || ed.isbn_10?.length
+        );
+        if (!firstIsbn) {
+          console.log(`${info.title}" pas d'isbn on affiche pas la team`);
+          continue;
+        }
+        const isbn = firstIsbn.isbn_13?.[0] || firstIsbn.isbn_10?.[0];
+
+        const cloneBookListAuthor = template.content.cloneNode(true);
+
+        const title = cloneBookListAuthor.querySelector(".book-title");
+        title.textContent = info.title;
+        title.href = `/pages/book-page.html?isbn=${isbn}`;
+
+        cloneBookListAuthor.querySelector(".book-author").textContent =
+          authorName;
+
+ 
+        const image = cloneBookListAuthor.querySelector(".book-cover");
+               image.tabIndex = 0;
+        image.src = `https://covers.openlibrary.org/b/id/${info.covers[0]}-L.jpg`;
+        image.addEventListener("click", () => {
+          window.location.href = `/pages/book-page.html?isbn=${isbn}`;
+        });
+
+        document.getElementById("book-list").appendChild(cloneBookListAuthor);
+      } catch (error) {
+        console.log(`Erreur ${info.title}`, error);
+      }
+    }
   } catch (error) {
-    console.error("Erreur :", error);
+    console.log("Erreur:", error);
   }
 }
 

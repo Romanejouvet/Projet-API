@@ -14,8 +14,8 @@
 
 <body>
   <header>
-    <button id="return-home">❮ Retour à la page d'accueil</button>
     <h1>IMAC BOOK</h1>
+    <button id="return-home" onclick="goHomePage()">❮ Retour à la page d'accueil</button>
   </header>
 
   <main>
@@ -30,14 +30,17 @@
       </template>
     </section>
     <section id="book-list-container">
-      <div id="book-list">
+      <h2>Bibliographie : </h2>
+      <section id="book-list">
         <template id="book-list-template">
           <div class="book-item">
             <img src="../medias/img/placeholder.jpeg" alt="Cover Image" class="book-cover" />
-            <h3 class="book-title">Book Title</h3>
+
+            <a class="book-title" href=""></a>
             <p class="book-author"></p>
           </div>
         </template>
+      </section>
     </section>
   </main>
 </body>
