@@ -1,7 +1,7 @@
 #book-list-container,
 #infos-author {
   width: 70%;
-  margin: 0 auto 40px auto;
+  margin: 0 auto;
 }
 
 #book-list {
@@ -20,9 +20,9 @@
 }
 
 .book-cover {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
 
   border-radius: 8px;
   border: solid 1px var(--gris);
@@ -31,7 +31,7 @@
 }
 
 .book-cover:hover {
-    transform: scale(1.03);
+  transform: scale(1.03);
 }
 
 @media (max-width: 900px) {
