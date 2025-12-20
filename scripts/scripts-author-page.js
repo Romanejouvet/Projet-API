@@ -58,17 +58,12 @@ async function getBookListAuthor() {
 
     const entries = BookAuthorData.entries || BookAuthorData;
 
-
-
-
     for (const info of entries) {
       try {
         if (!info.covers || info.covers.length === 0) {
           console.log(`${info.title} pas de couverture`);
-          continue; 
+          continue;
         }
-
-
 
         const editionsResponse = await fetch(
           `https://openlibrary.org${info.key}/editions.json`
@@ -83,8 +78,6 @@ async function getBookListAuthor() {
         }
         const isbn = firstIsbn.isbn_13?.[0] || firstIsbn.isbn_10?.[0];
 
-
-
         const cloneBookListAuthor = template.content.cloneNode(true);
 
         const title = cloneBookListAuthor.querySelector(".book-title");
@@ -94,15 +87,13 @@ async function getBookListAuthor() {
         cloneBookListAuthor.querySelector(".book-author").textContent =
           authorName;
 
+ 
         const image = cloneBookListAuthor.querySelector(".book-cover");
+               image.tabIndex = 0;
         image.src = `https://covers.openlibrary.org/b/id/${info.covers[0]}-L.jpg`;
         image.addEventListener("click", () => {
           window.location.href = `/pages/book-page.html?isbn=${isbn}`;
         });
-
-
-
-
 
         document.getElementById("book-list").appendChild(cloneBookListAuthor);
       } catch (error) {
