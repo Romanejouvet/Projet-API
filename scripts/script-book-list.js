@@ -1,91 +1,93 @@
-// script-book-list.js
-
 async function displayGenreBooks(genre) {
-    const bookInfos = [];
-
-    try {
-        const genreData = await genreAPI(genre);
-        console.log("Genre Data:", genreData);
-
-        const works = genreData.works || [];
-
-        for (let i = 0; i < 10; i++) {
-            const work = works[i];
-            if (!work) continue;
-
-            const bookName = work.title || "Titre inconnu";
-            const authorName = work.authors?.[0]?.name || "Auteur inconnu";
-            const bookCoverId = work.cover_id || null;
-            let bookLink = "#";
-            const authorLink = work.authors?.[0]?.key
-                ? `./pages/author-page.html?author=${work.authors[0].key.replace("/authors/", "")}`
-                : "#";
-
-            const workKey =  work.key;
-            let bookIsbnLink = "#";
-            if (workKey) {
-                const bookResponse = await fetch(`https://openlibrary.org${workKey}/editions.json`);
-                const bookData = await bookResponse.json();
-                console.log("Book Data for editions:", bookData);
-                bookIsbnLink = bookData.entries?.[0]?.isbn_13;
-                if (bookIsbnLink) {
-                    bookLink = `./pages/book-page.html?isbn=${bookIsbnLink}`;
-                }
-                else {
-                    bookLink = `./pages/book-page.html?isbn=`;
-                }
-            }
-
-            bookInfos.push([bookName, authorName, bookCoverId ? `https://covers.openlibrary.org/b/id/${bookCoverId}-M.jpg` : "", bookLink, authorLink]);
-        }
-
-        return bookInfos;
-
-    } catch (error) {
-        console.error("Error displaying genre books:", error);
-        return [];
-    }
-}
-
-async function displayGenreLists(genre) {
-    const bookInfos = await displayGenreBooks(genre);
-    if (!bookInfos || bookInfos.length === 0) return;
+  try {
+    const genreData = await genreAPI(genre);
+    console.log("Genre Data:", genreData);
 
     const template = document.getElementById("book-item-template");
     const bookList = document.getElementById("book-list");
 
-    bookList.innerHTML = "";
+    
+    bookList.textContent = "";
+    bookList.appendChild(template); 
 
-    for (const book of bookInfos) {
-        if (!book) continue;
+    const works = genreData.works || [];
+
+
+
+
+
+    for (let i = 0; i < 10 && i < works.length; i++) {
+      const work = works[i];
+
+
+      try {
+    
+        if (!work.cover_id) {
+          console.log(`${work.title} pas de cover`);
+          continue;
+        }
+
+        
+        
+        const editionsResponse = await fetch(
+          `https://openlibrary.org${work.key}/editions.json`
+        );
+        const editionsData = await editionsResponse.json();
+
+        const firstIsbn = editionsData.entries?.find(
+          (ed) => ed.isbn_13?.length || ed.isbn_10?.length
+        );
+
+        if (!firstIsbn) {
+          console.log(`${work.title} pas d'ISBN`);
+          continue;
+        }
+
+        const isbn = firstIsbn.isbn_13?.[0] || firstIsbn.isbn_10?.[0];
+
 
         const clone = template.content.cloneNode(true);
 
-        clone.querySelector(".book-item-link").href = book[3];
-        clone.querySelector(".book-cover").src = book[2] || "./medias/img/aucuneImage.png";
-        clone.querySelector(".book-cover").alt = `Couverture de ${book[0]}`;
-        clone.querySelector(".book-item-title").textContent = book[0];
-        clone.querySelector(".book-item-author").textContent = book[1];
-        clone.querySelector(".book-item-author").href = book[4];
+        
+        const bookLink = clone.querySelector(".book-item-link");
+        bookLink.href = `/pages/book-page.html?isbn=${isbn}`;
+
+        
+        const image = clone.querySelector(".book-cover");
+        image.src = `https://covers.openlibrary.org/b/id/${work.cover_id}-M.jpg`;
+
+
+        const title = clone.querySelector(".book-item-title");
+        title.textContent = work.title;
+
+
+        const authorLink = clone.querySelector(".book-item-author");
+        const authorName = work.authors?.[0]?.name || "Auteur inconnu";
+        authorLink.textContent = authorName;
+
+        if (work.authors?.[0]?.key) {
+          const authorKey = work.authors[0].key.replace("/authors/", "");
+          authorLink.href = `/pages/author-page.html?author=${authorKey}`;
+        } 
 
         bookList.appendChild(clone);
+      } catch (error) {
+        console.log(`Erreur ${work.title}:`, error);
+      }
     }
+  } catch (error) {
+    console.log("Erreur:", error);
+  }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    const template = document.getElementById("book-item-template");
-    if (!template) {
-        console.error("Template introuvable !");
-        return;
-    }
 
-    displayGenreLists("love");
+displayGenreBooks("amour");
 
-    const selectGenre = document.getElementById("select-genre");
-    selectGenre.addEventListener("change", (e) => {
-        const genre = e.target.value;
-        if (!genre) return;
-        displayGenreLists(genre);
-    });
+
+const selectGenre = document.getElementById("select-genre");
+selectGenre.addEventListener("change", (e) => {
+  const genre = e.target.value;
+  if (genre) {
+    displayGenreBooks(genre);
+  }
 });
-
