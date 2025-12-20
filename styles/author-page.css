@@ -28,3 +28,16 @@ section {
   margin: auto;
   width: 100%;
 }
+
+#book-title {
+  font-weight: bold;
+}
+
+#book-title:hover {
+  text-decoration: line-through;
+  cursor: pointer;
+}
+
+#book-cover:hover {
+  cursor: pointer;
+}
